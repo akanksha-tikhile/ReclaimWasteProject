@@ -41,7 +41,7 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="#information">Home</a>
+                                    <a class="nav-link" aria-current="page" href="driveropt.jsp">Driver</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Link</a>
@@ -87,7 +87,7 @@
                 <div class="admin-log-btn">
                     <div class="admin-head-btn">
                         <h2 class="admin-head">Admin</h2>
-                        <button id="admin-logout" class="logout-btn"><a class="link-light" href=".html">Log Out</a></button>
+                        <button id="admin-logout" class="logout-btn"><a class="link-light" href="adminlogin.jsp">Log Out</a></button>
                     </div>
                 </div>
 
@@ -126,21 +126,23 @@
                 <div class="collapse" id="requestDrop">
                     <div class="card card-body">
                         <div id="request-pending" class="pending">
-                           
+                           <h4>Pending</h4>
                             <div class="admin-info">
                                 <table class="admin-pending">
                                     <tr>
-                                        <th class="serial">S.No.</th>
+                                             <th class="serial">S.No.</th>
                                         <th class="name">Name</th>
+                                        <th class="email">Email</th>
                                         <th class="mobile">Modile No.</th>
                                         <th class="address">Address</th>    
                                         <th class="pin">Pin Code</th>
                                         <th class="wid">Waste Id</th>
-                                        <th class="waste_type">Waste Type</th>
+                                      
                                         <th class="quantity">Quantity</th>
-                                        <th class="request">Request</th>
-                                        <th class="process">Process</th>             
+                                       
+                                        <th class="process">Process</th>         
                                     </tr>
+                                   
    <% 
    try
    {
@@ -148,7 +150,7 @@
        String url="jdbc:mysql://localhost:3306/wastedb";
        String username="root";
        String password="W7301@jqir#";
-       String query="select * from fetchcom";
+       String query="select * from redisptb";
        Connection conn=DriverManager.getConnection(url, username, password);
        Statement stmt=conn.createStatement();
        ResultSet rs=stmt.executeQuery(query);
@@ -159,10 +161,15 @@
    
                                     
                                     <tr>
-                                        <td class="rp-c1-r1"><%out.println(rs.getString("sr_no")); %></td>
-                                        <td class="rp-c2-r1"><%out.println(rs.getString("name")); %></td>
-                                        <td class="rp-c3-r1"><%out.println(rs.getString("mob_no")); %></td>
-                                        <td class="rp-c4-r1"><%out.println(rs.getString("complaint")); %></td>                       
+                                        <td class="rp-c1-r1"><%out.println(rs.getInt("cid")); %></td>
+                                        <td class="rp-c2-r1"><%out.println(rs.getString("cname")); %></td>
+                                        <td class="rp-c3-r1"><%out.println(rs.getString("cemail")); %></td>
+                                        <td class="rp-c4-r1"><%out.println(rs.getString("cphno")); %></td>
+                                        <td class="rp-c5-r1"><%out.println(rs.getString("cadd")); %></td>
+                                        <td class="rp-c6-r1"><%out.println(rs.getString("cpin")); %></td>
+                                        <td class="rp-c7-r1"><%out.println(rs.getInt("wid")); %></td>
+                                        <td class="rp-c8-r1"><%out.println(rs.getString("cquant")); %></td>
+                                        <td class="rp-c9-r1"><%out.println(rs.getString("cpro")); %></td>                       
                                     </tr>
                                      <%
        }
@@ -182,33 +189,78 @@
                             </div>
                         </div>
                         <div id="request-complete" class="complete">
-                            <!--<h4>Complete</h4>-->
+                            <h4>Complete</h4>
                             <div class="admin-info">
                                 <table class="admin-complete">
                                    <tr>
                                         <th class="serial">S.No.</th>
                                         <th class="name">Name</th>
+                                        <th class="email">Email</th>
                                         <th class="mobile">Modile No.</th>
                                         <th class="address">Address</th>    
                                         <th class="pin">Pin Code</th>
                                         <th class="wid">Waste Id</th>
-                                        <th class="waste_type">Waste Type</th>
+                                      
                                         <th class="quantity">Quantity</th>
-                                        <th class="request">Request</th>
+                                       
                                         <th class="process">Process</th>             
                                     </tr>
+                                   <% 
+   try
+   {
+       Class.forName("com.mysql.jdbc.Driver");
+       String url="jdbc:mysql://localhost:3306/wastedb";
+       String username="root";
+       String password="W7301@jqir#";
+       String query="select * from redisptb1";
+       Connection conn=DriverManager.getConnection(url, username, password);
+       Statement stmt=conn.createStatement();
+       ResultSet rs=stmt.executeQuery(query);
+       while(rs.next())
+       {
+    	   
+   %>
+   
+                                    
                                     <tr>
-                                        <td id="rc-c1-r1"></td>
-                                        <td id="rc-c2-r1"></td>
-                                        <td id="rc-c3-r1"></td>
-                                        <td id="rc-c4-r1"></td>                       
+                                        <td class="rp-c1-r1"><%out.println(rs.getInt("cid")); %></td>
+                                        <td class="rp-c2-r1"><%out.println(rs.getString("cname")); %></td>
+                                        <td class="rp-c3-r1"><%out.println(rs.getString("cemail")); %></td>
+                                        <td class="rp-c4-r1"><%out.println(rs.getString("cphno")); %></td>
+                                        <td class="rp-c5-r1"><%out.println(rs.getString("cadd")); %></td>
+                                        <td class="rp-c6-r1"><%out.println(rs.getString("cpin")); %></td>
+                                        <td class="rp-c7-r1"><%out.println(rs.getInt("wid")); %></td>
+                                        <td class="rp-c8-r1"><%out.println(rs.getString("cquant")); %></td>
+                                        <td class="rp-c9-r1"><%out.println(rs.getString("cpro")); %></td>                       
                                     </tr>
-                                  
+                                     <%
+       }
+   %>
+                              
                                 </table>
+                                 <%
+        rs.close();
+        stmt.close();
+        conn.close();
+   }
+   catch(Exception e)
+   {
+        e.printStackTrace();
+   }
+   %>
+                                  
+                              
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                <div>
+                <br>
+                <br>
+              <!--    <input type="text" value="enter sr_no."><br><br>-->
+             	<button id="admin-logout" class="logout-btn"><a class="link-light" href="update1logic.jsp">Update</a></button>
+                                 </div>               
                 <br>
                 <!-- Button 2 -->
                 <button class="btn btn-dark btn-lg btn-complaint" type="button" data-bs-toggle="collapse" data-bs-target="#completeDrop"
@@ -222,30 +274,52 @@
                             <div class="admin-info">
                                 <table class="admin-pending">
                                     <tr>
-                                        <th class="serial">S.No.</th>
+                                          <th class="serial">Id</th>
                                         <th class="name">Name</th>
+                                        <th class="email">Email</th>
                                         <th class="mobile">Modile No.</th>
-                                        <th class="request">Request</th>                    
+                                        <th class="complaint">Complaint</th>    
+                                                              
                                     </tr>
+                                   <% 
+   try
+   {
+       Class.forName("com.mysql.jdbc.Driver");
+       String url="jdbc:mysql://localhost:3306/wastedb";
+       String username="root";
+       String password="W7301@jqir#";
+       String query="select * from complainttb";
+       Connection conn=DriverManager.getConnection(url, username, password);
+       Statement stmt=conn.createStatement();
+       ResultSet rs=stmt.executeQuery(query);
+       while(rs.next())
+       {
+    	   
+   %>
+   
+                                    
                                     <tr>
-                                        <td class="cp-c1-r1"></td>
-                                        <td class="cp-c2-r1"></td>
-                                        <td class="cp-c3-r1"></td>
-                                        <td class="cp-c4-r1"></td>                       
+                                       <td class="rp-c1-r1"><%out.println(rs.getInt("coid")); %></td>
+                                        <td class="rp-c2-r1"><%out.println(rs.getString("coname")); %></td>
+                                        <td class="rp-c3-r1"><%out.println(rs.getString("coemail")); %></td>
+                                        <td class="rp-c4-r1"><%out.println(rs.getString("cophno")); %></td>
+                                        <td class="rp-c5-r1"><%out.println(rs.getString("compt")); %></td>           
                                     </tr>
-                                    <tr>
-                                        <td class="cp-c1-r2"></td>
-                                        <td class="cp-c2-r2"></td>
-                                        <td class="cp-c3-r2"></td>
-                                        <td class="cp-c4-r2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cp-c1-r3"></td>
-                                        <td class="cp-c2-r3"></td>
-                                        <td class="cp-c3-r3"></td>
-                                        <td class="cp-c4-r3"></td>
-                                    </tr>
+                                     <%
+       }
+   %>
+                              
                                 </table>
+                                 <%
+        rs.close();
+        stmt.close();
+        conn.close();
+   }
+   catch(Exception e)
+   {
+        e.printStackTrace();
+   }
+   %>
                             </div>
                         </div>
                         <div id="complain-complete" class="complete">
@@ -253,38 +327,71 @@
                             <div class="admin-info">
                                 <table class="admin-complete">
                                     <tr>
-                                        <th class="serial">S.No.</th>
+                                         <th class="serial">Id</th>
                                         <th class="name">Name</th>
+                                        <th class="email">Email</th>
                                         <th class="mobile">Modile No.</th>
-                                        <th class="mobile">Request</th>                    
+                                        <th class="complaint">Complaint</th>                       
                                     </tr>
+                                    <% 
+   try
+   {
+       Class.forName("com.mysql.jdbc.Driver");
+       String url="jdbc:mysql://localhost:3306/wastedb";
+       String username="root";
+       String password="W7301@jqir#";
+       String query="select * from complainttb1";
+       Connection conn=DriverManager.getConnection(url, username, password);
+       Statement stmt=conn.createStatement();
+       ResultSet rs=stmt.executeQuery(query);
+       while(rs.next())
+       {
+    	   
+   %>
+   
+                                    
                                     <tr>
-                                        <td id="cc-c1-r1"></td>
-                                        <td id="cc-c2-r1"></td>
-                                        <td id="cc-c3-r1"></td>
-                                        <td id="cc-c4-r1"></td>                       
+                                        <td class="rp-c1-r1"><%out.println(rs.getInt("coid")); %></td>
+                                        <td class="rp-c2-r1"><%out.println(rs.getString("coname")); %></td>
+                                        <td class="rp-c3-r1"><%out.println(rs.getString("coemail")); %></td>
+                                        <td class="rp-c4-r1"><%out.println(rs.getString("cophno")); %></td>
+                                        <td class="rp-c5-r1"><%out.println(rs.getString("compt")); %></td>
+                                                               
                                     </tr>
-                                    <tr>
-                                        <td id="cc-c1-r2"></td>
-                                        <td id="cc-c2-r2"></td>
-                                        <td id="cc-c3-r2"></td>
-                                        <td id="cc-c4-r2"></td>
-                                    </tr>
-                                    <tr>
-                                        <td id="cc-c1-r3"></td>
-                                        <td id="cc-c2-r3"></td>
-                                        <td id="cc-c3-r3"></td>
-                                        <td id="cc-c4-r3"></td>
-                                    </tr>
+                                     <%
+       }
+   %>
+                              
                                 </table>
+                                 <%
+        rs.close();
+        stmt.close();
+        conn.close();
+   }
+   catch(Exception e)
+   {
+        e.printStackTrace();
+   }
+   %>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div>
+                <br>
+                <br>
+                
+             	<button id="admin-logout" class="logout-btn"><a class="link-light" href="update2logic.jsp">Update</a></button>
+                                 </div>               
+                <br>
+             
+            
+             
             
         </div>
+        
     </section>
+    
 
 
 </body>
